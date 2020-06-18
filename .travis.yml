@@ -1,0 +1,9 @@
+before_install:
+  - sudo apt-get -y install libttspico-utils
+language: python
+python:
+  - "3.5"
+before_install:
+  - pip install -r requirements-dev.txt
+script:
+  - make test

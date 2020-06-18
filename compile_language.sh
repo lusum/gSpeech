@@ -2,7 +2,7 @@
 here=`dirname "$(cd ${0%/*} && echo $PWD/${0##*/})"`
 cd $here
 
-trash ./locale
+rm -rf ./locale
 
 for lng in ./po/*.po ; do
     #~ echo $lng

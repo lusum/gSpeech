@@ -1,0 +1,18 @@
+[Desktop Entry]
+Version=0.8.0
+Exec=gspeech
+Icon=gSpeech
+Icon[en-GB]=gSpeech-en-GB
+Icon[en-US]=gSpeech-en-US
+Icon[de]=gSpeech-de-DE
+Icon[es]=gSpeech-es-ES
+Icon[it]=gSpeech-it-IT
+Icon[fr]=gSpeech-fr-FR
+Terminal=false
+Type=Application
+Categories=Audio;TextTools;
+Keywords=gspeech;tts;text to speech;
+Name=gSpeech
+Comment=A minimal GUI for the Text To Speech 'Svox Pico'. Read clipboard or selected text in different languages and manage it : pause, stop, replay.
+Keywords[fr]=gspeech;tts;synthèse vocale;liseuse;synthétiseur vocal;
+Comment[fr]=Interface graphique au synthétiseur vocal Svoxpico.

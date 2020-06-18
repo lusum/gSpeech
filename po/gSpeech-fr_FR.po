@@ -79,7 +79,7 @@ msgstr "Aucun texte sélectionné."
 
 #: gSpeech.py:363
 msgid "I'm reading the text. One moment please."
-msgstr "Je suis en train de lire le texte."
+msgstr "Je suis en train de lire le texte. Un instant svp."
 
 #: gSpeech.py:492
 msgid "%s's Website"
@@ -92,3 +92,15 @@ msgstr "Sauvegarder la lecture"
 #: gSpeech.py:516
 msgid "Wave file (*.wav)"
 msgstr "Fichier wave (*.wav)"
+
+msgid "Play"
+msgstr "Lire"
+
+msgid "Active notification"
+msgstr "Afficher les notifications"
+
+msgid "this text is too long for reading without SOX"
+msgstr "Le text est trop long pour être lue sans utiliser SOX"
+
+msgid "Voice speed"
+msgstr "Vitesse de lecture"

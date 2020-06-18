@@ -1,0 +1,15 @@
+gspeech                                         usr/bin
+gspeech-cli                                     usr/bin
+
+speech/*.py                                     usr/lib/python3/dist-packages/speech
+speech/widgets/*.py                             usr/lib/python3/dist-packages/speech/widgets
+speech/workers/*.py                             usr/lib/python3/dist-packages/speech/workers
+speech/workers/fr_FR/*.py                       usr/lib/python3/dist-packages/speech/workers/fr_FR
+
+dict/*                                          usr/share/gspeech/dict
+
+icons/*.svg                                     usr/share/icons/hicolor/scalable/apps
+
+locale/*                                        usr/share/locale
+
+gspeech.desktop                                 usr/share/applications
