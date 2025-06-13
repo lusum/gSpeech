@@ -41,10 +41,8 @@ def get_audio_commands(text, outfile, lang, cache_path, speed):
             text = ''
     return names, cmds
 
-
 def shell(cmd):
     return subprocess.call(cmd)
-
 
 def run_audio_files(names, cmds, outfile='out.wav'):
     if len(cmds) == 1:
@@ -68,6 +66,5 @@ def run_audio_files(names, cmds, outfile='out.wav'):
     multiprocessing.Pool(nproc).map(shell, cmds)
 
     subprocess.Popen(['sox'] + names + [outfile]).communicate()
-
     for _file in names:
         os.remove(_file)
