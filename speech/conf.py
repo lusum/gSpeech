@@ -88,6 +88,7 @@ class Conf:
             self.voice_speed = speed
 
     def __init__(self, script_dir=None):
+        self.create_cache()
         self.pid = join(self.cache_path, 'gspeech.pid')
         self.temp_path = join(self.cache_path, 'speech.wav')
 
@@ -138,8 +139,10 @@ class Conf:
         try:
             gi.require_version('AppIndicator3', '0.1')
             from gi.repository import AppIndicator3  # noqa: F401
+            print('status : appindicator 3')
         except (ValueError, ImportError):
             self.has_app_indicator = False
+            print('status : other')
 
         self.set_lang(self.lang)
 
@@ -176,6 +179,16 @@ class Conf:
         if not isfile(self.path):
             self.update()
 
+    def create_cache(self):
+        if isfile(self.cache_path):
+            return
+        try:
+            os.makedirs(self.cache_path, exist_ok=True)
+            return
+        except Exception:
+            import tempfile
+            self.cache_path = tempfile.mkdtemp()
+
     def update(self):
         raw = RawConfigParser()
         raw.add_section('CONFIGURATION')
@@ -199,9 +212,10 @@ class Conf:
             'SHOWNOTIFICATION',
             self.show_notification
         )
-        if not os.access(self.path, os.W_OK):
-            return
-        os.makedirs(self.dir, exist_ok=True)
-        print(self.path)
-        with open(self.path, 'w') as stream:
-            raw.write(stream)
+        try:
+            os.makedirs(self.dir, exist_ok=True)
+            with open(self.path, 'w+') as stream:
+                raw.write(stream)
+        except Exception:
+            return False
+        return True

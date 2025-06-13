@@ -15,7 +15,7 @@ for file_path in glob.glob('locale/*/LC_MESSAGES/*.mo'):
     I18N_FILES.append((target_path, [file_path]))
 
 DICT_FILES = []
-for file_path in glob.glob('dict/*/*'):
+for file_path in glob.glob('dict/*/*/*'):
     lang = file_path[len('dict/'):]
     target_path = os.path.dirname(os.path.join(
         'share/gspeech/dict',

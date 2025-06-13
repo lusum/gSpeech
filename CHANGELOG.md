@@ -7,9 +7,42 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased : 1.0]
 
+https://github.com/coqui-ai/TTS
+https://github.com/myshell-ai/OpenVoice
+https://github.com/daniilrobnikov/vits2
+
 ### Added
 - GTK unit tests
-- speed management
+- support of the two hundred most popular french lastname https://fr.wikipedia.org/wiki/Liste_des_noms_de_famille_les_plus_courants_en_France
+- support most popular history names : https://www.histoire-pour-tous.fr/biographies.html
+
+## [0.11.0]
+
+### Added
+- read roman numerals
+- support of the thousand most popular French male firstname : https://motperdu.fr/top-1000-des-prenoms-de-garcons
+- support of the thousand most popular French female firstname : https://motperdu.fr/top-1000-des-prenoms-de-filles
+
+## [0.10.1]
+
+### Bugfix
+
+- option doesn't write new conf file.
+
+## [0.10]
+
+### Bugfix
+
+- better sox integration : trigger when text to reach is too long.
+- setup.py whith new dict tree
+- edit speed on tray change speed on multimedia popup and vice versa
+- edit lang on tray change lang on multimedia popup and vice versa
+
+### Added
+
+- speed management : voice speech integration on cli, tray and multimedia menu
+- integrate sox into nix
+- screenshots
 
 ## [0.9.2]
 

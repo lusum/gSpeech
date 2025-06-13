@@ -8,7 +8,7 @@
 gSpeech is a minimal GUI for the Text To Speech 'Svox Pico'.
 Read clipboard or selected text in different languages and manage it : pause, stop, replay.
 
-### Last stable version
+## Last stable version
 
 [![Packaging status](https://repology.org/badge/vertical-allrepos/gspeech.svg)](https://repology.org/project/gspeech/versions)
 
@@ -18,9 +18,16 @@ Read clipboard or selected text in different languages and manage it : pause, st
 
 Ubuntu:
 
-Depends: python (>=3.5) python-gst1.0 (>=1.0) python3-gi (>=2.24) libttspico-utils (>= 1.0) python-notify (>=0.1) gstreamer1.0-plugins-base gstreamer1.0-plugins-good gstreamer1.0-pulseaudio
+Depends: python (>=3.5) python3-gst-1.0 (>=1.0) python3-gi (>=2.24) libttspico-utils (>= 1.0) python-notify (>=0.1) gstreamer1.0-plugins-base gstreamer1.0-plugins-good gstreamer1.0-pulseaudio gir1.2-appindicator3-0.1
 
 Suggests: sox (is needed to speech text with more than 2^15 characters)
+
+## Screenshots
+
+<div align="center">
+    <img src="./interface_example.png" alt="interface example" width="500"/>
+    <img src="./cli_example.png" alt="cli example" width="500"/>
+</div>
 
 ## CLI usage
 
@@ -31,25 +38,20 @@ Suggests: sox (is needed to speech text with more than 2^15 characters)
 ## Docker
 
 ```sh
-git clone https://github.com/mothsART/gspeech.git
-cd gspeech/docker
-docker build .
-docker run -i -t gspeech /bin/bash
+make docker build.{env}
+make docker run.{env}
 ```
 
 ## Tests
 
 ```sh
-python3 -m unittest
+make test
 ```
 
 ## Create a Debian package
 
 ```sh
-git clone https://github.com/mothsART/gspeech.git
-cd gspeech
-debuild // binary package : .deb, alias of dpkg-buildpackage -rfakeroot -d -us -uc
-debuild -S // source package : alias of dpkg-buildpackage -rfakeroot -d -us -uc -S
+make build.debian
 ```
 
 and launch with :
@@ -67,5 +69,5 @@ nix build
 ## Clean (generate files)
 
 ```sh
-git clean -xdf // dry run : git clean -xdn
+make clean
 ```

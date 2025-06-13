@@ -1,11 +1,10 @@
 import gi
 gi.require_version('Gdk', '3.0')
-gi.require_version('Gst', '1.0')
 gi.require_version('Gtk', '3.0')
-from gi.repository import Gdk, Gst, Gtk
+from gi.repository import Gdk, Gtk
 
 from . import pid
-from .conf import Conf
+from .api import Player
 from .i18n import (
     _languages, _pause, _read_clipboard, _read_selected,
     _tooltip, _voice_speed
@@ -13,16 +12,11 @@ from .i18n import (
 from .widgets import notify
 from .widgets.events import (
     changed_cb, changed_speed, on_execute, on_left_click,
-    on_play_pause, on_player, on_stop
+    on_play_pause, on_stop
 )
 from .widgets.menu import on_right_click
 from .widgets.save import on_save
 
-
-Gst.init('')
-
-# load configuration
-conf = Conf()
 
 try:
     gi.require_version('AppIndicator3', '0.1')
@@ -69,40 +63,38 @@ def generic_button(
     hbox.pack_end(button, False, False, 0)
 
 
-def lang_combobox(hbox, ind, tray, conf):
-    combobox = Gtk.ComboBoxText.new()
+def get_lang_combobox(lang_combobox, hbox, ind, tray, conf, menu_langs):
     label = Gtk.Label(_languages)
     hbox.pack_start(label, False, False, 0)
-    hbox.pack_start(combobox, False, False, 0)
+    hbox.pack_start(lang_combobox, False, False, 0)
     count = 0
     for lang in conf.list_langs:
-        combobox.append_text(lang)
+        lang_combobox.append_text(lang)
         if lang == conf.lang:
-            combobox.set_active(count)
+            lang_combobox.set_active(count)
         count += 1
-    combobox.connect('changed', changed_cb, ind, tray, conf)
+    lang_combobox.connect('changed', changed_cb, ind, tray, conf, menu_langs)
 
 
-def voice_speed_box(hbox, conf):
-    combobox = Gtk.ComboBoxText.new()
+def voice_speed_box(voice_combobox, hbox, conf, menu_voice_speed):
     label = Gtk.Label(_voice_speed)
-    hbox.pack_end(combobox, False, False, 0)
+    hbox.pack_end(voice_combobox, False, False, 0)
     hbox.pack_end(label, False, False, 0)
     count = 0
     for speed in conf.list_voice_speed:
-        combobox.append_text(str(speed))
+        voice_combobox.append_text(str(speed))
         if speed == conf.voice_speed:
-            combobox.set_active(count)
+            voice_combobox.set_active(count)
         count += 1
-    combobox.connect('changed', changed_speed, conf)
+    voice_combobox.connect('changed', changed_speed, conf, menu_voice_speed)
 
 
 class MainApp:
     """The main class of the software"""
-    def __init__(self, conf):
+    def __init__(self, player):
+        conf = player.conf
         notify.init(conf)
         window = Gtk.Window(title=conf.app_name, modal=True)
-        player = on_player(conf.temp_path)
         win_play_pause = Gtk.Button(stock=Gtk.STOCK_MEDIA_PAUSE)
 
         # Play item menu
@@ -110,6 +102,11 @@ class MainApp:
 
         ind = None
         tray = None
+        lang_combobox = Gtk.ComboBoxText.new()
+        menu_langs = Gtk.Menu()
+        voice_combobox = Gtk.ComboBoxText.new()
+        menu_voice_speed = Gtk.Menu()
+
         if conf.has_app_indicator:
             ind = appindicator.Indicator.new(
                 conf.app_name,
@@ -118,13 +115,20 @@ class MainApp:
             )
             ind.set_status(appindicator.IndicatorStatus.ACTIVE)
             on_right_click(
+                None,
+                None,
+                None,
                 window,
                 ind,
                 tray,
                 conf,
                 menu_play_pause,
                 win_play_pause,
-                player
+                player,
+                lang_combobox,
+                menu_langs,
+                voice_combobox,
+                menu_voice_speed
             )
         else:
             tray = Gtk.StatusIcon()
@@ -138,7 +142,11 @@ class MainApp:
                 conf,
                 menu_play_pause,
                 win_play_pause,
-                player
+                player,
+                lang_combobox,
+                menu_langs,
+                voice_combobox,
+                menu_voice_speed
             )
             tray.connect(
                 'activate',
@@ -253,8 +261,8 @@ class MainApp:
         vbox.pack_start(hbox, False, False, 0)
 
         hbox = Gtk.HBox()
-        lang_combobox(hbox, ind, tray, conf)
-        voice_speed_box(hbox, conf)
+        get_lang_combobox(lang_combobox, hbox, ind, tray, conf, menu_langs)
+        voice_speed_box(voice_combobox, hbox, conf, menu_voice_speed)
         vbox.pack_start(hbox, False, False, 0)
 
         window.add(vbox)
@@ -264,6 +272,8 @@ class MainApp:
 
 
 def main():
-    pid.kill_if_already_exist(conf.app_name, conf.pid)
-    gSpeech = MainApp(conf)
+    player = Player()
+    player.set_ui(True)
+    pid.kill_if_already_exist(player.conf.app_name, player.conf.pid)
+    gSpeech = MainApp(player)
     gSpeech.main()

@@ -15,7 +15,7 @@ from ..i18n import _pause, _play, _read_selected
 from ..textutils import text_to_dict
 
 
-def on_lang(widget, ind, tray, lang, conf):
+def on_lang(ind, tray, lang, conf):
     """Action on language submenu items"""
     conf.set_lang(lang)
     conf.lang = lang
@@ -26,7 +26,7 @@ def on_lang(widget, ind, tray, lang, conf):
     tray.set_from_file(conf.icon_path)
 
 
-def on_speed(widget, speed, conf):
+def on_speed(speed, conf):
     """Action on voice speed submenu items"""
     conf.set_speed(float(speed))
     conf.voice_speed = float(speed)
@@ -44,7 +44,7 @@ def on_reload(
     """Reload GUI"""
     myscript = os.path.abspath(sys.argv[0])
     subprocess.Popen(myscript)
-    exit()
+    exit(os.EX_OK)
 
 
 def on_media_dialog(
@@ -77,40 +77,53 @@ def on_destroy(
     Gtk.main_quit()
 
 
-def changed_cb(combobox, ind, tray, conf):
-    model = combobox.get_model()
-    index = combobox.get_active()
+def changed_lang_menu(
+    widget, ind, tray, lang, conf, lang_combobox, index=None
+):
+    on_lang(ind, tray, lang, conf)
+    lang_combobox.active = index
+    if widget.get_active():
+        lang_combobox.set_active(index)
+
+
+def changed_cb(lang_combobox, ind, tray, conf, menu_langs):
+    model = lang_combobox.get_model()
+    index = lang_combobox.get_active()
     if index is not None:
-        on_lang(None, ind, tray, model[index][0], conf)
+        on_lang(ind, tray, model[index][0], conf)
+        menu_langs.get_children()[index].set_active(True)
 
 
-def changed_speed(combobox, conf):
-    model = combobox.get_model()
-    index = combobox.get_active()
+def changed_speed_menu(
+    widget, speed, conf, speed_combobox, index=None
+):
+    on_speed(speed, conf)
+    speed_combobox.active = index
+    if widget.get_active():
+        speed_combobox.set_active(index)
+
+
+def changed_speed(speed_combobox, conf, menu_voice_speed):
+    model = speed_combobox.get_model()
+    index = speed_combobox.get_active()
     if index is not None:
-        on_speed(None, model[index][0], conf)
+        on_speed(model[index][0], conf)
+        menu_voice_speed.get_children()[index].set_active(True)
 
 
-def on_message(bus, message, player):
-    """error message on playing function"""
-    t = message.type
-    if t == Gst.MessageType.EOS:
-        # file ended, stop
-        player.set_state(Gst.State.NULL)
-    if t == Gst.MessageType.ERROR:
-        # Error ocurred, print and stop
-        player.set_state(Gst.State.NULL)
-        err, debug = message.parse_error()
-        print('Error: %s' % err, debug)
-
-
-def on_left_click(widget, conf, menu_play_pause, win_play_pause, player):
+def on_left_click(
+    widget,
+    conf,
+    menu_play_pause,
+    win_play_pause,
+    player
+):
     """
     left click on status icon function
     function like this and not merge with on_execute
     to have possibility to use for something different
     """
-    on_execute(widget, conf, menu_play_pause, win_play_pause, player)
+    on_execute(widget, None, conf, menu_play_pause, win_play_pause, player)
 
 
 def on_execute(
@@ -122,7 +135,10 @@ def on_execute(
     player=None
 ):
     """ execute text to speech"""
-    if widget.get_label() == _read_selected:
+    if (
+        hasattr(widget, 'get_label')
+        and widget.get_label() == _read_selected
+    ):
         text = Gtk.Clipboard.get(Gdk.SELECTION_PRIMARY).wait_for_text()
     else:
         text = Gtk.Clipboard.get(Gdk.SELECTION_CLIPBOARD).wait_for_text()
@@ -141,21 +157,9 @@ def on_execute(
     )
     run_audio_files(names, cmds, conf.temp_path)
     if player:
-        player.set_state(Gst.State.NULL)
-    player.set_state(Gst.State.PLAYING)
+        player.stop()
+    player.play()
     button_state(menu_play_pause, win_play_pause, player)
-
-
-def on_player(path):
-    """Element playbin automatic plays any file"""
-    player = Gst.ElementFactory.make('playbin', 'player')
-    # Set the uri to the file
-    player.set_property('uri', 'file://' + path)
-    # Enable message bus to check for errors in the pipeline
-    bus = player.get_bus()
-    bus.add_signal_watch()
-    bus.connect('message', on_message, player)
-    return player
 
 
 def on_play_pause(
@@ -174,9 +178,9 @@ def on_play_pause(
             and not widget.get_active()
         )
     ):
-        player.set_state(Gst.State.PLAYING)
+        player.play()
     else:
-        player.set_state(Gst.State.PAUSED)
+        player.pause()
     button_state(menu_play_pause, win_play_pause, player)
 
 
@@ -188,12 +192,12 @@ def on_stop(
     win_play_pause=None,
     player=None
 ):
-    player.set_state(Gst.State.NULL)
+    player.stop()
     button_state(menu_play_pause, win_play_pause, player)
 
 
 def button_state(menu_play_pause, win_play_pause, player):
-    gst_state = player.get_state(Gst.CLOCK_TIME_NONE)[1]
+    gst_state = player.get_state()
     if gst_state == Gst.State.PLAYING:
         win_play_pause.set_label(Gtk.STOCK_MEDIA_PAUSE)
         menu_play_pause.set_label(_pause)

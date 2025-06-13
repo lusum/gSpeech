@@ -44,3 +44,4 @@ _save_speech = _('Save the speech')
 _text_to_long = _('this text is too long for reading without SOX')
 
 _voice_speed = _('Voice speed')
+_acces_denied_path = _('Acces denied on config path "%s"')

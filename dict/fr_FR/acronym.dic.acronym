@@ -1,5 +1,4 @@
-NAT=nate
-DHCP=d h c p
+nat =nate 
 dvd=dévédé
 usb= u s b
 pdf= p d f
@@ -10,6 +9,10 @@ dll=d l l
 dsi=d s i
 erp=e r p
 pc=p c
+jpg=j peg
+jpeg=j peg
+png=p n g
 
 avc=a v c
-
+apn=a p n
+svg=s v g

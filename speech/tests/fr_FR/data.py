@@ -86,18 +86,13 @@ datas = [
     },
     {
         'ini': """C'est ma chaise.""",
-        'new': """c'est ma chaise.""",
+        'new': """sè ma chaise.""",
         'file': 'cest_ma_chaise'
     },
     {
         'ini': """Cette tache est invisible à l'oeil nu.""",
         'new': """cette tache ai invisible à l'euil nu.""",
         'file': 'cette_tache_est_invisible_a_loeil_nu'
-    },
-    {
-        'ini': """C'est ma chaise.""",
-        'new': """c'est ma chaise.""",
-        'file': 'cest_ma_chaise'
     },
     {
         'ini': 'Dirigez-vous vers la sortie.',
@@ -136,7 +131,7 @@ datas = [
     },
     {
         'ini': """C'est à toi ou à moi.""",
-        'new': """c'est à toi ou à moi.""",
+        'new': """sè à toi ou à moi.""",
         'file': 'cest_a_toi_ou_a_moi'
     },
     {
@@ -174,20 +169,20 @@ datas = [
         'new': 'nous chantons en coeur.'
     },
     {
-        'ini': 'Le lapin et la lapine.',
-        'new': 'le lapun et la lapine.'
+        'ini': 'Histoire de lapins : Le lapin, la lapine, les lapereaux.',
+        'new': 'histoire de lapins : le lapin, la lapine, les lapereaux.'
     },
     {
-        'ini': 'Un coq et le coquin.',
-        'new': 'un coque et le coquin.'
+        'ini': 'Le chant des coqs. Un coq et le coquin.',
+        'new': 'le chant des coqs. un coque et le coquin.'
     },
     {
         'ini': """J'ai de plus en plus peur.""",
         'new': """j'ai de plusanplu peur."""
     },
     {
-        'ini': 'Je suis un grand fan.',
-        'new': 'je suis un grand fane.'
+        'ini': 'Je suis un grand fan. Plein de fans.',
+        'new': 'je suis un grand fane. plein de fane.'
     },
     {
         'ini': 'Il met son t-shirt.',
@@ -199,7 +194,7 @@ datas = [
     },
     {
         'ini': """C'est cosy chez toi!""",
-        'new': """c'est cozy chez toi!"""
+        'new': """sè cozy chez toi!"""
     },
     {
         'ini': 'un deal, le dealer ou le dealeur',
@@ -218,33 +213,172 @@ datas = [
         'new': 'nous regardons un houest erne'
     },
     {
-        'ini': ''.join((
-            """j'ai commandé des hamburgers.
-            Vous les voulez à quoi vos burgers ?
-            """
-        )),
-        'new': ''.join((
-            """j'ai commandé des hambeurgueurs.
-            vous les voulez à quoi vos beurgueurs ?
-            """
-        )),
+        'ini': "j'ai commandé des hamburgers.",
+        'new': "j'ai commandé des hambeurgueurs."
     },
     {
-        'ini': ''.join((
-            """on commence par un baby-foot.
-            on continue avec un foot puis un footing.
-            Enfin, babyfoot et encore une partie de football.
-            """
-        )),
-        'new': ''.join((
-            """on commence par un babifoute.
-            on continue avec un foute pu is un fouting.
-            enfin, babifoute et encore une partie de fouteball.
-            """
-        )),
+        'ini': """vous les voulez à quoi vos burgers ?""",
+        'new': """vous les voulez à quoi vos beurgueurs ?"""
+    },
+    {
+        'ini': """on commence par un baby-foot.""",
+        'new': """on commence par un babifoute."""
+    },
+    {
+        'ini': """on continue avec un foot puis un footing.""",
+        'new': """on continue avec un foute pu is un fouting."""
+    },
+    {
+        'ini': """Enfin, babyfoot et encore une partie de football.""",
+        'new': """enfin, babifoute et encore une partie de fouteball."""
     },
     {
         'ini': 'Il est trop beau ton baby! On attend son babysitter.',
         'new': 'il ai trop beau ton baibi! on attend son baibissiteur.'
+    },
+    {
+        'ini': 'Le contenu du presse-papiers est vide.',
+        'new': 'le contenu du presse papiers ai vide.'
+    },
+    {
+        'ini': "Je dis n'importe quoi et j'aime ça.",
+        'new': "je dis nimportequoi et j'aime ça."
+    },
+    {
+        'ini': 'Zoomer une photo. Il partit avec son APN sans son zoom.',
+        'new': 'zoumer une photo. il partit avec son a p n sans son zoum.'
+    },
+    {
+        'ini': 'Fichiers au format jpg, png, gif et jpeg',
+        'new': 'fichiers au format j peg, p n g, gif et j peg'
+    },
+    {
+        'ini': 'Je suis évidement le dernier.',
+        'new': 'je suis évidament le dernier.'
+    },
+    {
+        'ini': 'Mettez ça là ou glissez-le ici.',
+        'new': 'mettésala ou glisséleu ici.'
+    },
+    {
+        'ini': """Confondre la droite et la gauche ?""",
+        'new': """confondre la droi tt et la gauche ?""",
+    },
+    {
+        'ini': ''.join((
+            """La casquette est aussi bien un """,
+            """couvre-chef qu'un accessoire tendance."""
+        )),
+        'new': ''.join((
+            """la casquette ai aussi bien un """,
+            """couvre-chef cain accessoire tendance."""
+        ))
+    },
+    {
+        'ini': 'Désirez-vous supprimer les indices sélectionnés ?',
+        'new': 'désirévou supprimer les indices sélectionnés ?'
+    },
+    {
+        'ini': """Plus il en parle, plus il m’énerve.""",
+        'new': """pluse il en parle, pluse il m'énerve."""
+    },
+    {
+        'ini': 'Plus de 10 kilomètres. Plus du quart.',
+        'new': 'plu de 10 kilomètres. plu du quart.'
+    },
+    {
+        'ini': 'De plus grands espaces. Du plus petit au plus grand.',
+        'new': 'de plu grands espaces. du plu petit au plu grand.'
+    },
+    {
+        'ini': 'la somme des carrés des longueurs des deux autres côtés.',
+        'new': 'la somme des carrés des longueurs des deuse autre côtés.'
+    },
+    {
+        'ini': 'V siècles se sont écoulés.',
+        'new': '5 siècles se sont écoulés.'
+    },
+    {
+        'ini': 'Au XVIIème siècle naquit Louis XIV.',
+        'new': 'au 17ème siècle naquit louis 14.'
+    },
+    {
+        'ini': 'Le mardi IV Novembre MCMLXXXVII à XII heure XLVI.',
+        'new': 'le mardi 4 novembre 1987 à 12 heure 46.'
+    },
+    {
+        'ini': 'La première démocratie est apparue au Ve siècle.',
+        'new': 'la première démocratie ai apparue au 5ème siècle.'
+    },
+    {
+        'ini': 'Henri IV',
+        'new': 'henri 4'
+    },
+    {
+        'ini': 'Tu veux échanger mes € contre des $ ?',
+        'new': 'tu veux échanger mes € contre des $ ?'
+    },
+    {
+        'ini': 'anus, Marius, bus, phalus, minus, diplodocus',
+        'new': 'anu-ce, mariu-ce, bu-ce, phalu-ce, minu-ce, diplodocu-ce'
+    },
+    {
+        'ini': 'Sacha, Sam, Marc; Tom, Mohamed, Raphaël et Paul',
+        'new': 'sacha, same, marque; tomme, moamaide, rafaèle et peaule'
+    },
+    {
+        'ini': 'Tu peux me passer la mayonaise ?',
+        'new': 'tu peux me passer la ma yonaise ?'
+    },
+    {
+        'ini': 'Ils plantent du riz et du maïs.',
+        'new': 'ils plantent du riz et du ma ice.'
+    },
+    {
+        'ini': 'Je lui offre une rose car elle aime les roses.',
+        'new': 'je lui offre une ro oze car elle aime les ro oze.'
+    },
+    {
+        'ini': 'Des sacs de course. Un sac à main.',
+        'new': 'des saque de course. un saque à main.'
+    },
+    {
+        'ini': 'Ca peut paraitre verbeux.',
+        'new': 'sa peut paraitre verbeux.'
+    },
+    {
+        'ini': "j'aime bcp les fleurs et le vin brut.",
+        'new': "j'aime beaucoup les fleurs et le vin brute."
+    },
+    {
+        'ini': 'La racine de PI est égale à 3,14',
+        'new': 'la racine de pi ai égale à 3,14'
+    },
+    {
+        'ini': 'Le langage C et C++ sont très utilisés.',
+        'new': 'le langage cé et c++ sont très utilisés.',
+    },
+    {
+        'ini': 'qq abréviations. bcp de techniques. cqfd',
+        'new': ''.join((
+            """quelques abréviations. beaucoup de techniques. """,
+            """ce qu'il faut déduire"""
+        ))
+    },
+    {
+        'ini': """L'arm et amd sont des architectures de CPU.""",
+        'new': """l'a r m et a m d sont des architectures de c p u.""",
+    },
+    {
+        'ini': """Ce site a des soucis d'IHM.""",
+        'new': """ce site a des soucis d'i h m.""",
+    },
+    {
+        'ini': 'Oh, un mignon petit hamster et un beau chiot.',
+        'new': 'o, un mignon petit hamstère et un beau chieo.',
+    },
+    {
+        'ini': 'Une mouette, un millepattes et une mouche.',
+        'new': 'une moète, un milpattes et une mou che.',
     },
 ]
